@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <p style="color: green"><%= notice %></p>
+  <% content_for :title, "Articles" %>
+  <h1>Articles</h1>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>本文</th>
+        <th>要約</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.title %></td>
+          <td><%= article.body %></td>
+          <td>
+            <%=link_to "表示", article, class: "btn btn-sm btn-secondary"%>
+            <%=link_to "編集", edit_article_path(article), class: "btn btn-sm btn-secondary"%>
+            <%=link_to "削除", article, class: "btn btn-sm btn-secondary"%>
+          </td>
+        </tr>
+        <%= render article %>
+        <p>
+          <%= link_to "Show this article", article %>
+        </p>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "New article", new_article_path %>
+</div>

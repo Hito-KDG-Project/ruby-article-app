@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      article: 記事
+  attributes:
+    article:
+      title: タイトル
+      body: 本文
+      summary: 概要
+  errors:
+    format: "%{attribute}%{message}"
+  messages:
+    blank: "を入力してください"

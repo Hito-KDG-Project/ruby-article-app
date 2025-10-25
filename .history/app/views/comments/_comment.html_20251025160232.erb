@@ -1,0 +1,12 @@
+<li class="mb-2">
+  <div class="text-sm text-gray-500">
+    <%= h comment.commenter %>
+    <%= h comment.body %>
+  </div>
+  <div class="mb-1">
+    <%= link_to "削除", [comment.article, comment],
+      data: { turbo_method: :delete, turbo_confirm: "削除してよろしいですか?" },
+      class: "btn btn-sm btn-danger"
+    %>
+  </div>
+</li>

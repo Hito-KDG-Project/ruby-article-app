@@ -1,0 +1,17 @@
+{
+  // ERBファイル（例: index.html.erb）をERB言語として扱う
+  "files.associations": {
+    "*.html.erb": "erb"
+  },
+
+  // ERB言語ファイルに対する設定
+  "[erb]": {
+    "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+    "editor.formatOnSave": true
+  },
+
+  // invalid byte sequence in US-ASCII エラー対策
+  "vscode-erb-beautify.customEnvVar": {
+    "LC_ALL": "en_US.UTF-8"
+  }
+}
