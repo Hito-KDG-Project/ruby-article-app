@@ -1,0 +1,11 @@
+<h2 class="text-center mb-4 fw-bold">ログイン</h2>
+<%= form_for(resource, as: resource_name, url: sessions_path(resource_name)) do |f| %>
+  <div class="mb-3">
+    <%= f.label :email, "メールアドレス", class: "form-label" %>
+    <%= f.email_field :email, autofocus: true, class: "form-control form-control-lg" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :email, "メールアドレス", class: "form-label" %>
+    <%= f.email_field :email, autofocus: true, class: "form-control form-control-lg" %>
+  </div>
+<% end %>

@@ -1,14 +1,15 @@
 class CommentsController < ApplicationController
-  # set_articleを一番先に実行する
   before_action :set_article
 
   def create
+    @article = Article.find(params[:article_id])
     @comment = @article.comments.build(comment_params)
+
     if @comment.save
       redirect_to @article, notice: "コメントを投稿しました。"
     else
-      flash.now[:alert] = "コメントの投稿に失敗しました。"
-      render "article/show", status: :unprocessable_entity
+      # エラーを保持したまま詳細画面を再描画
+      render "articles/show", status: :unprocessable_entity
     end
   end
 
@@ -28,3 +29,4 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:commenter, :body)
   end
 end
+
