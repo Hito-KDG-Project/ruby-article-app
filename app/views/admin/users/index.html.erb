@@ -1,0 +1,31 @@
+<div class="container mt-4">
+
+  <% provide :title, "ユーザー一覧" %>
+
+  <h1 class="mb-3">ユーザー一覧</h1>
+
+  <table class="table table-hover table-striped table-bordered shadow rounded overflow-hidden align-middle">
+    <thead class="table-light text-center text-uppercase">
+      <tr>
+        <th style="width: 10%;">ID</th>
+        <th style="width: 40%;">Email</th>
+        <th style="width: 30%;">登録日</th>
+        <th style="width: 20%;">操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td class="text-center"><%= user.id %></td>
+          <td><%= user.email %></td>
+          <td class="text-center"><%= user.created_at.strftime("%Y-%m-%d") %></td>
+          <td class="text-center">
+            <%= link_to "詳細", admin_user_path(user),
+                        class: "btn btn-sm btn-outline-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

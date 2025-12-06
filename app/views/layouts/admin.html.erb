@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "管理画面" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= asset_path('article_icon-32x32.ico') %>">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+
+    <!-- ▼ 管理画面ナビバー（影を弱めるためボーダーを薄く） -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+
+        <!-- 左：管理画面タイトル + Adminバッジ -->
+        <span class="navbar-brand fw-bold d-flex align-items-center">
+          管理画面
+          <span class="badge bg-primary ms-2">Admin</span>
+        </span>
+
+        <!-- ハンバーガー -->
+        <button id="navbarToggler" class="navbar-toggler collapsed" type="button"
+          aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- 右側メニュー（元のリンクはそのまま） -->
+        <div class="collapse navbar-collapse justify-content-end text-center" id="adminNavbar">
+          <ul class="navbar-nav align-items-center gap-3 mt-3 mt-lg-0">
+
+            <li class="nav-item">
+              <%= link_to "ユーザー一覧", admin_users_path,
+                  class: "nav-link fw-semibold" %>
+            </li>
+
+            <li class="nav-item">
+              <%= link_to "記事管理アプリへ戻る", root_path,
+                  class: "nav-link text-secondary" %>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+
+    <!-- ▼ フラッシュ -->
+    <div class="container mt-3">
+      <% flash.each do |key, message| %>
+        <% next if message.blank? %>
+        <div class="alert <%= (key.to_s == 'notice') ? 'alert-success' : 'alert-danger' %> alert-dismissible fade show" role="alert">
+          <%= message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- ▼ メイン -->
+    <main class="container mt-4 mb-5">
+      <%= yield %>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ▼ ハンバーガーの純JS制御 -->
+    <script>
+      document.addEventListener("turbo:before-cache", function () {
+        var menu = document.getElementById("adminNavbar");
+        var btn  = document.getElementById("navbarToggler");
+        if (!menu || !btn) return;
+
+        menu.classList.remove("show");
+        btn.classList.add("collapsed");
+        btn.setAttribute("aria-expanded", "false");
+      });
+
+      document.addEventListener("turbo:load", function () {
+        var menu = document.getElementById("adminNavbar");
+        var btn  = document.getElementById("navbarToggler");
+        if (!menu || !btn) return;
+
+        btn.onclick = function () {
+          var open = !menu.classList.contains("show");
+          menu.classList.toggle("show", open);
+          btn.classList.toggle("collapsed", !open);
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+        };
+      });
+    </script>
+
+  </body>
+</html>

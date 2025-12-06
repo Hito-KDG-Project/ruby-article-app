@@ -1,0 +1,32 @@
+<!-- app/views/admin/users/show.html.erb -->
+
+<div class="container mt-4 mb-4">
+
+  <% provide :title, "ユーザー詳細｜#{@user.email}" %>
+
+  <h1 class="h2 mb-3">ユーザー詳細</h1>
+
+  <!-- ▼ ユーザー情報：カード表示 -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+
+      <dl class="row mb-0">
+        <dt class="col-sm-3 text-muted">ID</dt>
+        <dd class="col-sm-9"><%= @user.id %></dd>
+
+        <dt class="col-sm-3 text-muted">Email</dt>
+        <dd class="col-sm-9"><%= @user.email %></dd>
+
+        <dt class="col-sm-3 text-muted">登録日</dt>
+        <dd class="col-sm-9"><%= @user.created_at.strftime("%Y-%m-%d") %></dd>
+      </dl>
+
+    </div>
+  </div>
+
+  <!-- ▼ 下部アクション：元のリンクをボタン風に -->
+  <div class="d-flex">
+    <%= link_to "一覧へ戻る", admin_users_path,
+                class: "btn btn-outline-secondary" %>
+  </div>
+</div>
