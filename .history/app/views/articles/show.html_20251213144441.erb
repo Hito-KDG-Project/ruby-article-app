@@ -7,8 +7,8 @@
       <% if @article.image.attached? %>
         <div class="mb-3 text-center">
           <%= image_tag @article.image,
-            class: "img-fluid rounded border",
-            style: "max-height: 420px;" %>
+class: "img-fluid rounded border",
+style: "max-height: 420px;" %>
         </div>
       <% end %>
       <%= render @article %>

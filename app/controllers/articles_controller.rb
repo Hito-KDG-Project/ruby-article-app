@@ -24,13 +24,13 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    #@article = Article.new(article_params)
+    # @article = Article.new(article_params)
     @article = current_user.articles.build(article_params)
 
     respond_to do |format|
       if @article.save
-        #format.html { redirect_to @article, notice: "Article was successfully created." }
-        format.html { redirect_to @article, notice: t('notices.create', model: Article.model_name.human)}
+        # format.html { redirect_to @article, notice: "Article was successfully created." }
+        format.html { redirect_to @article, notice: t("notices.create", model: Article.model_name.human) }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,8 +43,8 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        #format.html { redirect_to @article, notice: "Article was successfully updated.", status: :see_other }
-        format.html { redirect_to @article, notice: t('notices.update', model: Article.model_name.human), status: :see_other }
+        # format.html { redirect_to @article, notice: "Article was successfully updated.", status: :see_other }
+        format.html { redirect_to @article, notice: t("notices.update", model: Article.model_name.human), status: :see_other }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html do
         redirect_to articles_path,
-                    notice: I18n.t('notices.destroy', model: Article.model_name.human),
+                    notice: I18n.t("notices.destroy", model: Article.model_name.human),
                     status: :see_other
       end
       format.json { head :no_content }
@@ -75,7 +75,7 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.expect(article: [ :title, :body, :summary ])
+      params.expect(article: [ :title, :body, :summary, :image ])
     end
 
     def correct_user
